@@ -21,7 +21,7 @@ Logik provides 3 main features :
 Logik is designed to be use in a terminal. You can install it by executing the following command directly inside the main folder. (you need to `git clone https://github.com/64bit-lab/Logik` first)
 
 ```
-$ python3 setup.py
+$ python3 setup.py install
 ```
 
 This will install Logik directly on your machine. You can then start logik by typing :
