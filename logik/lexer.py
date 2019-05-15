@@ -1,6 +1,11 @@
 import re
 
 def lex(seq):
+    """
+        An iterator that extract all tokens from an input string.
+
+        seq -- the sequence of character to lex (string)
+    """
     l = len(seq)
     
     while l > 0:
@@ -40,6 +45,7 @@ def lex(seq):
 
 
 def pprint(token):
+    """Pretty print a token"""
     print('\033[31m'
         + token[0]
         + "\033[0m"

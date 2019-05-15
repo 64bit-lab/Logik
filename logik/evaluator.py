@@ -1,4 +1,4 @@
-from parser import *
+from . parser import *
 from itertools import product
 
 
@@ -75,18 +75,5 @@ def evaluate_all(ast):
         print("\nValue : \n")
         print(evaluate(ast, {}))
 
-
-if __name__ == '__main__':
-    # input
-    string = input('>>> ')
-    # lexing
-    tokens = lex(string)
-    # parsing
-    seq = Seq(list(tokens))
-    ast = parse(seq)
-    # display the AST
-    print('\nSyntax tree :\n')
-    pprint(ast)
-    evaluate_all(ast)
 
         
