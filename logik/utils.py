@@ -3,7 +3,7 @@ import os
 
 def display_info():
     print("------------------------------------")
-    print("Logik toolkit v0.1")
+    print("Logik toolkit v0.2")
     print("<https://github.com/64bit-lab/Logik>")
     print("------------------------------------")
 
