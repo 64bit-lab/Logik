@@ -1,5 +1,5 @@
 from . evaluator import *
-
+from . utils import *
 """
 Module : Logik
 
@@ -40,15 +40,17 @@ SOFTWARE.
 
 # Main function
 def main():
+    display_info()
     while True:
         # input
-        string = input('>>> ')
-        # lexing
-        tokens = lex(string)
-        # parsing
-        seq = Seq(list(tokens))
-        ast = parse(seq)
-        # display the AST
-        print('\nSyntax tree :\n')
-        pprint(ast)
-        evaluate_all(ast)
+        string = input('>> ')
+        if not cmd(string):
+            # lexing
+            tokens = lex(string)
+            # parsing
+            seq = Seq(list(tokens))
+            ast = parse(seq)
+            # display the AST
+            print('\nSyntax tree :\n')
+            pprint(ast)
+            evaluate_all(ast)
