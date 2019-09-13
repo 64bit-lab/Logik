@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='logik',
-      version='0.1',
+      version='0.2',
       description='A simple way to interact with propositional logic in python',
       url='https://github.com/64bit-lab/Logik',
       author='Arthur Correnson',
