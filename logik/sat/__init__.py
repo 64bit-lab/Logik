@@ -41,23 +41,6 @@
 #  SOFTWARE.                                                                       #
 ####################################################################################
 
-from . evaluator import *
-from . utils import *
-from . sat import *
 
-# Main function
-def main():
-    display_info()
-    while True:
-        # input
-        string = input('>> ')
-        if not cmd(string):
-            # lexing
-            tokens = lex(string)
-            # parsing
-            lexbuf = Lexbuf(list(tokens))
-            ast = parse(lexbuf)
-            # display the AST
-            print('\nSyntax tree :\n')
-            pprint(ast)
-            evaluate_all(ast)
+
+from . process_ast import *

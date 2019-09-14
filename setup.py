@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 
 setup(name='logik',
       version='0.2',
@@ -7,6 +8,6 @@ setup(name='logik',
       author='Arthur Correnson',
       author_email='arthur.correnson@gmail.com',
       license='MIT',
-      packages=['logik'],
+      packages=find_packages(),
       scripts=['bin/logik'],
       zip_safe=False)
