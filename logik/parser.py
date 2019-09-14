@@ -1,18 +1,28 @@
 from . lexer import *
 
 
-def priority(char):
-    if char == "non":
+def priority(operator):
+    """
+    @brief      Return operator priority
+    
+    @param      operator  The operator
+    
+    @return     the priority
+    """
+    if operator == "non":
         return 5
-    if char == "et":
+    if operator == "et":
         return 4
-    if char == "ou":
+    if operator == "ou":
         return 3
-    if char == "->":
+    if operator == "->":
         return 1
 
 
-class Seq:
+class Lexbuf:
+    """
+    @brief      Lexbuf class for token analysis.
+    """
     def __init__(self, string):
         self.str = string
         self.index = -1
@@ -29,19 +39,13 @@ class Seq:
         return None
 
 
-def parse(seq, end=None):
-    """
-        Parse a sequence of tokens
-
-        seq -- a Seq object of tokens
-        end -- parse until next token 'end'
-    """
+def parse(lexbuf, end=None):
 
     expr = [] # expression stack
     oper = [] # operator stack
 
     # read the current token
-    c = seq.next_char()
+    c = lexbuf.next_char()
 
     while c not in (end, (end, '')):
 
@@ -54,7 +58,7 @@ def parse(seq, end=None):
 
         elif c[0] == "(":
             # token c is '(', parse until token ')'
-            expr.append(parse(seq, ")"))
+            expr.append(parse(Lexbuf, ")"))
 
         elif c[0] == 'binop':
             # token c is an operator
@@ -70,22 +74,22 @@ def parse(seq, end=None):
 
         elif c[0] == 'unop':
             # token c is the unary operator
-            if seq.see_next() is None:
+            if lexbuf.see_next() is None:
                 # syntax error
                 raise Exception("'non' token must be followed \
                     by an expression or a symbol")
-            elif seq.see_next()[0] == "(":
+            elif lexbuf.see_next()[0] == "(":
                 # apply the operator to the next expression
-                seq.next_char()
-                e = parse(seq, ')')
+                lexbuf.next_char()
+                e = parse(Lexbuf, ')')
                 expr.append(('non', e))
-            elif seq.see_next()[0] == "symb" or seq.see_next()[0] == 'value':
+            elif lexbuf.see_next()[0] == "symb" or Lexbuf.see_next()[0] == 'value':
                 # apply the operator to the next symbol
-                e = seq.next_char()
+                e = lexbuf.next_char()
                 expr.append(('non', e))
 
         # move to then next token
-        c = seq.next_char()
+        c = lexbuf.next_char()
 
     # fill the AST
     while len(oper) != 0:
@@ -99,8 +103,11 @@ def parse(seq, end=None):
 
 
 def pprint(ast):
-    """pretty print an Abstract Syntax Tree"""
-
+    """
+    @brief      Pretty print an AST
+    
+    @param      ast   The ast
+    """
     def red(string):
         # format a string to be printed in red
         return '\033[31m' + string + '\033[0m'
@@ -126,7 +133,7 @@ if __name__ == '__main__':
     # lexing
     tokens = lex(string)
     # parsing
-    seq = Seq(list(tokens))
+    Lexbuf = Lexbuf(list(tokens))
     # display the AST
-    # pprint(parse(seq))
-    print(parse(seq))
+    # pprint(parse(Lexbuf))
+    print(parse(Lexbuf))

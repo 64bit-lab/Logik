@@ -48,8 +48,8 @@ def main():
             # lexing
             tokens = lex(string)
             # parsing
-            seq = Seq(list(tokens))
-            ast = parse(seq)
+            lexbuf = Lexbuf(list(tokens))
+            ast = parse(lexbuf)
             # display the AST
             print('\nSyntax tree :\n')
             pprint(ast)
