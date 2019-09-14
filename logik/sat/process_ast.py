@@ -1,3 +1,7 @@
+"""
+Submodules for AST manipulation.
+"""
+
 
 def remove_implications(ast):
     """
@@ -20,6 +24,9 @@ def remove_implications(ast):
 
 def _is_node_op(ast, op):
     return ast[0] == op
+
+def _is_litteral(ast):
+    return ast[0] == 'sym' or ast[0] == 'value'
 
 
 def distribute_or(ast):
@@ -92,6 +99,14 @@ def remove_negations(ast):
             exprB = remove_negations(('non', exprB))
             exprC = remove_negations(('non', exprC))
             return ('or', exprB, exprC)
+
+        if _is_litteral(exprA):
+            return ('non', exprA)
+
+        if _is_node_op(exprA, 'non'):
+            _, exprB = exprA
+            exprB = remove_negations(exprB)
+            return exprB
     
     if len(ast) == 3:
         op, A, B = ast
@@ -103,19 +118,21 @@ def remove_negations(ast):
         return ast
 
 
-def convert_to_cnf(ast):
+def prepare_for_cnf(ast):
     """
-    @brief      Convert an ast into Conjuntive Normal Form
+    @brief      Prepare an ast to be converted in Conjuntive Normal Form.
     
     @param      ast   The ast
     
-    @return     { description_of_the_return_value }
+    @return     another AST ready to be converted in CNF.
     """
     ast = remove_implications(ast)
     ast = remove_negations(ast)
     ast = distribute_or(ast)
 
     return ast
+
+
 
 
 
@@ -126,3 +143,4 @@ def convert_to_cnf(ast):
 #             ('and', ('value', 'c'), ('value', 'd'))))))
 
 # print(remove_negations(('non', ('and', ('value', 'a'), ('value', 'b')))))
+print(remove_negations(('non', ('non', ('non', ('non', ('value', 'b')))))))

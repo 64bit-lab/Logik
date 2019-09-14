@@ -61,3 +61,8 @@ def main():
             print('\nSyntax tree :\n')
             pprint(ast)
             evaluate_all(ast)
+
+            print('\nClauses :\n')
+
+            print(solver.extract_clauses(prepare_for_cnf(ast)))
+

@@ -44,3 +44,4 @@
 
 
 from . process_ast import *
+from . solver import *
