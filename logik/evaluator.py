@@ -1,9 +1,20 @@
+"""
+Submodules to evaluate expressions.
+"""
+
 from . parser import *
 from itertools import product
 
 
 def get_vars(ast):
-    """List all free variables in an expression"""
+    """
+    @brief      Exctract every free variables from AST.
+    
+    @param      ast   The ast
+    
+    @return     The variables.
+    """
+    
     var_list = []
     def r_get_var(ast):
         typ = ast[0]
@@ -23,7 +34,14 @@ def get_vars(ast):
 
 
 def make_env(var_list):
-    """Build a truth table for an expression"""
+    """
+    @brief      Determine each possible valuation for a set of variables.
+    
+    @param      var_list  The variable list
+    
+    @return     A list of possible valuations.
+    """
+    
     tab = list(product([0, 1], repeat=len(var_list)))
     env_list = []
     for lines in tab:
@@ -36,8 +54,12 @@ def make_env(var_list):
 
 def evaluate(ast, env):
     """
-        Evaluate an expression according to the valuation 
-        described by 'env'
+    @brief      Evaluate expression represented by AST with respect to valuation ENV
+    
+    @param      ast   The ast
+    @param      env   The environment (valuation)
+    
+    @return     the result of the evaluation
     """
     typ = ast[0]
 
@@ -57,8 +79,9 @@ def evaluate(ast, env):
 
 def evaluate_all(ast):
     """
-        Evaluate an expression and if it contains free variables, 
-        display the truth table.
+    @brief      Print the truth table for an expression with free variables.
+    
+    @param      ast   The ast
     """
     var_list = get_vars(ast)
     envs, tab = make_env(var_list)
@@ -75,5 +98,3 @@ def evaluate_all(ast):
         print("\nValue : \n")
         print(evaluate(ast, {}))
 
-
-        

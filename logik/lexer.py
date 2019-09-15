@@ -1,34 +1,37 @@
 import re
 
-def lex(seq):
+def lex(string : str):
     """
-        An iterator that extract all tokens from an input string.
-
-        seq -- the sequence of character to lex (string)
+    @brief      Perform lexing on a string.
+    
+    @param      string   The stringuence
+    
+    @return     an iterator on tokens
     """
-    l = len(seq)
+    l = len(string)
     
     while l > 0:
-        c = seq[0]
+        c = string[0]
         next_position = 0
 
         if c == ' ':
-            seq = seq[1:]
+            string = string[1:]
         
         elif c in ('0', '1'):
             yield ('value', c)
-            seq = seq[1:]
+            string = string[1:]
 
-        elif re.match('->|et|ou', seq):
-            yield ('binop', seq[0:2])
-            next_position = 2
+        elif re.match('->|et|ou', string):
+            match = re.match('->|et|ou', string)
+            yield ('binop', match.group(0))
+            next_position = match.end()
 
-        elif re.match('non', seq):
-            yield ('unop', seq[0:4])
+        elif re.match('non', string):
+            yield ('unop', string[0:4])
             next_position = 4
 
-        elif re.match('[a-zA-Z]+', seq):
-            match = re.match('[a-zA-Z]+', seq, re.M)
+        elif re.match('[a-zA-Z]+', string, re.M):
+            match = re.match('[a-zA-Z]+', string, re.M)
             yield ('symb', match.group(0))
             next_position = match.end()
 
@@ -40,12 +43,16 @@ def lex(seq):
             print('errror')
             break
         
-        seq = seq[next_position:]
-        l = len(seq)
+        string = string[next_position:]
+        l = len(string)
 
 
 def pprint(token):
-    """Pretty print a token"""
+    """
+    @brief      Pretty print a token
+    
+    @param      token  The token
+    """
     print('\033[31m'
         + token[0]
         + "\033[0m"
@@ -56,8 +63,8 @@ def pprint(token):
 
 
 if __name__ == '__main__':
-    seq = input('>>> ')
-    for i, tokens in enumerate(lex(seq)):
+    string = input('>>> ')
+    for i, tokens in enumerate(lex(string)):
         print(i+1, end=" ")
         pprint(tokens)
 
