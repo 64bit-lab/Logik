@@ -58,7 +58,7 @@ def parse(lexbuf, end=None):
 
         elif c[0] == "(":
             # token c is '(', parse until token ')'
-            expr.append(parse(Lexbuf, ")"))
+            expr.append(parse(lexbuf, ")"))
 
         elif c[0] == 'binop':
             # token c is an operator
@@ -81,7 +81,7 @@ def parse(lexbuf, end=None):
             elif lexbuf.see_next()[0] == "(":
                 # apply the operator to the next expression
                 lexbuf.next_char()
-                e = parse(Lexbuf, ')')
+                e = parse(lexbuf, ')')
                 expr.append(('non', e))
             elif lexbuf.see_next()[0] == "symb" or Lexbuf.see_next()[0] == 'value':
                 # apply the operator to the next symbol
@@ -136,4 +136,4 @@ if __name__ == '__main__':
     Lexbuf = Lexbuf(list(tokens))
     # display the AST
     # pprint(parse(Lexbuf))
-    print(parse(Lexbuf))
+    print(parse(lexbuf))

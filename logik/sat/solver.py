@@ -6,25 +6,26 @@ from . process_ast import *
 
 def extract_clauses(ast):
     
-    if ast[0] == 'symbol':
+    if ast[0] == 'symb':
         return [ast]
 
-    if _is_node_op(ast, 'non'):
+    if is_node_op(ast, 'non'):
         return [ast]
 
-    if _is_node_op(ast, 'or'):
+    if is_node_op(ast, 'ou'):
         clause = []
         clause += extract_clauses(ast[1])
         clause += extract_clauses(ast[2])
         return [clause]
 
-    if _is_node_op(ast, 'and'):
+    if is_node_op(ast, 'et'):
         clauses = []
         clauses += extract_clauses(ast[1])
         clauses += extract_clauses(ast[2])
         return clauses
 
     else:
+        print(ast)
         raise Exception('Bound variable error')
 
 

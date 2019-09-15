@@ -98,19 +98,3 @@ def evaluate_all(ast):
         print("\nValue : \n")
         print(evaluate(ast, {}))
 
-
-def evaluate_all_list(ast):
-    """
-    @brief      Return the truth table in the form of a list.
-    
-    @param      ast   The ast
-    
-    @return     List of values.
-    """
-    var_list = get_vars(ast)
-    envs, _ = make_env(var_list)
-    res = []
-    for env in envs:
-        res.append(evaluate(ast, env))
-    return res
-

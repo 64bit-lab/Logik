@@ -1,4 +1,5 @@
-from logik import sat
+from logik import *
+from logik.sat import *
 from utils import equivalent
 
 
@@ -60,7 +61,7 @@ def test_remove_negations():
         "(non (a et b)) is equivalent to ((non a) ou (non b))\n"
     assert equivalent(exprC, exprD), \
         "(non (a ou b)) is equivalent to ((non a) et (non b))\n"
-    assert equivalent(exprE, exprD), \
+    assert equivalent(exprE, exprF), \
         "(non (non a)) is equivalent to (a)\n"
 
 
@@ -69,7 +70,10 @@ def test_prepare_for_cnf():
 
 
 def test_extract_clauses():
-    return
+    exprA    = ('ou', ('symb', 'a'), ('symb', 'b'))
+    clausesA = sat.solver.extract_clauses(exprA)
+
+    assert clausesA == [[('symb', 'a'), ('symb', 'b')]]
 
 
 def run():
@@ -84,6 +88,12 @@ def run():
     print('TEST remove_negations :')
     test_remove_negations()
     print('-> ok')
+
+    print('TEST extract_clauses :')
+    test_extract_clauses()
+    print('-> ok')
+
+
 
 
     
