@@ -2,20 +2,22 @@
 Submodules to evaluate expressions.
 """
 
-from . parser import *
+from .parser import *
 from itertools import product
+import sys
 
 
 def get_vars(ast):
     """
     @brief      Exctract every free variables from AST.
-    
+
     @param      ast   The ast
-    
+
     @return     The variables.
     """
-    
+
     var_list = []
+
     def r_get_var(ast):
         typ = ast[0]
         if typ == 'value':
@@ -36,12 +38,12 @@ def get_vars(ast):
 def make_env(var_list):
     """
     @brief      Determine each possible valuation for a set of variables.
-    
+
     @param      var_list  The variable list
-    
+
     @return     A list of possible valuations.
     """
-    
+
     tab = list(product([0, 1], repeat=len(var_list)))
     env_list = []
     for lines in tab:
@@ -55,10 +57,10 @@ def make_env(var_list):
 def evaluate(ast, env):
     """
     @brief      Evaluate expression represented by AST with respect to valuation ENV
-    
+
     @param      ast   The ast
     @param      env   The environment (valuation)
-    
+
     @return     the result of the evaluation
     """
     typ = ast[0]
@@ -77,24 +79,23 @@ def evaluate(ast, env):
         return max(1 - evaluate(ast[1], env), evaluate(ast[2], env))
 
 
-def evaluate_all(ast):
+def evaluate_all(ast, file=sys.stdout):
     """
     @brief      Print the truth table for an expression with free variables.
-    
+
     @param      ast   The ast
     """
     var_list = get_vars(ast)
     envs, tab = make_env(var_list)
-    
+
     if len(var_list) > 0:
         print("\nTruth table : \n")
         print(*var_list)
-        print('--'*(len(var_list)))
-        
+        print('--' * (len(var_list)))
+
         for i, row in enumerate(envs):
             print(*tab[i], end=' ')
             print(evaluate(ast, row))
     else:
         print("\nValue : \n")
         print(evaluate(ast, {}))
-
