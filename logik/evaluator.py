@@ -33,7 +33,7 @@ def get_vars(ast):
     return var_list
 
 
-def make_env(var_list):
+def make_envs(var_list):
     """
     @brief      Determine each possible valuation for a set of variables.
     
@@ -77,14 +77,14 @@ def evaluate(ast, env):
         return max(1 - evaluate(ast[1], env), evaluate(ast[2], env))
 
 
-def evaluate_all(ast):
+def print_truth_table(ast):
     """
     @brief      Print the truth table for an expression with free variables.
     
     @param      ast   The ast
     """
     var_list = get_vars(ast)
-    envs, tab = make_env(var_list)
+    envs, tab = make_envs(var_list)
     
     if len(var_list) > 0:
         print("\nTruth table : \n")

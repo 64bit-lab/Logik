@@ -8,7 +8,7 @@ def equivalent(exprA, exprB):
     vars2.sort()
     
     if vars1 == vars2:
-        envs, _ = lgk.make_env(vars1)
+        envs, _ = lgk.make_envs(vars1)
         eq = True
         i = 0
         while i < len(envs) and eq == True:

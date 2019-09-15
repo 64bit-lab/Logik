@@ -40,7 +40,7 @@ def cmd(c):
 
     if c == "table":
         form = input('formula >> ')
-        evaluate_all(parse(Lexbuf(list(lex(form)))))
+        print_truth_table(parse(Lexbuf(list(lex(form)))))
         return
 
     if c == "solve":
