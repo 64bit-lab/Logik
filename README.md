@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/64bit-lab/Logik.svg?branch=master)](https://travis-ci.org/64bit-lab/Logik)
+
 # Logik
 
 This program provide a simple way to manipulate and interact with propositional logic expressions.
