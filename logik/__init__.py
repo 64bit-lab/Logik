@@ -42,27 +42,13 @@
 ####################################################################################
 
 from . evaluator import *
-from . utils import *
+from . CLI import *
 from . sat import *
 
-# Main function
+# Main function (REPL)
 def main():
     display_info()
     while True:
-        # input
-        string = input('>> ')
-        if not cmd(string):
-            # lexing
-            tokens = lex(string)
-            # parsing
-            lexbuf = Lexbuf(list(tokens))
-            ast = parse(lexbuf)
-            # display the AST
-            print('\nSyntax tree :\n')
-            pprint(ast)
-            evaluate_all(ast)
-
-            print('\nClauses :\n')
-
-            print(solver.extract_clauses(prepare_for_cnf(ast)))
+        string = input('[ command ] @ ')
+        cmd(string)
 
