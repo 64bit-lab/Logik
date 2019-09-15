@@ -41,10 +41,11 @@ $ logik
 
 ### Commands
 
-+ `tree`  : inputs a formula and display its syntax tree
-+ `table` : inputs a formula and display its truth table
-+ `solve` : **WIP**, will apply resolution algorithm to a set of clauses
-+ `cnf`   : convert a formula into conjunctive normal form
++ `tree`    : inputs a formula and display its syntax tree
++ `table`   : inputs a formula and display its truth table
++ `solve`   : **WIP**, will apply resolution algorithm to a set of clauses
++ `cnf`     : convert a formula into conjunctive normal form
++ `clauses` : inputs a formula and display it as a set of clauses
 
 ### Syntax of logical expressions/formulas
 

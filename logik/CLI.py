@@ -7,7 +7,7 @@ from . sat import solver
 
 def display_info():
     print("------------------------------------")
-    print("Logik toolkit v0.2")
+    print("Logik toolkit v0.3")
     print("<https://github.com/64bit-lab/Logik>")
     print("------------------------------------")
 
@@ -19,9 +19,10 @@ def display_help():
     print("[ Disjunction ]  a et b")
     print("[ Implication ]  a -> b")
     print("Features :")
-    print("[ command - \033[1msolve\033[0m ] input a set of clauses and apply resolution to it")
-    print("[ command - \033[1mtree\033[0m  ] input a formula and display its syntax tree")
-    print("[ command - \033[1mtable\033[0m ] input a formula and display its truth table (the formula is considered as a function of each free variable)")
+    print("[ command - \033[1msolve\033[0m  ] inputs a set of clauses and apply resolution to it")
+    print("[ command - \033[1mtree\033[0m   ] inputs a formula and display its syntax tree")
+    print("[ command - \033[1mtable\033[0m  ] inputs a formula and display its truth table (the formula is considered as a function of each free variable)")
+    print("[ command - \033[1mclauses\033[0m ] inputs a formula and display it as a set of clauses")
 
 
 def cmd(c):
