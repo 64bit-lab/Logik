@@ -79,7 +79,7 @@ def evaluate(ast, env):
         return max(1 - evaluate(ast[1], env), evaluate(ast[2], env))
 
 
-def evaluate_all(ast, file=sys.stdout):
+def evaluate_all(ast):
     """
     @brief      Print the truth table for an expression with free variables.
 
