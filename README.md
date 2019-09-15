@@ -36,10 +36,17 @@ This will start the interactive command line interface :
 
 ```
 $ logik
->>> # type any expression here
+[ command ] @ # type a command here
 ```
 
-### Syntax
+### Commands
+
++ `tree`  : inputs a formula and display its syntax tree
++ `table` : inputs a formula and display its truth table
++ `solve` : **WIP**, will apply resolution algorithm to a set of clauses
++ `cnf`   : convert a formula into conjunctive normal form
+
+### Syntax of logical expressions/formulas
 
 The syntax of the expressions in Logik is really simple :
 
@@ -77,25 +84,6 @@ You can use parenthesis to write some more complex expressions :
 
 ```
 (a ou b) -> (a et c) or ((a et d) or (b -> (c and e)))
-```
-
-When you type expression with free variables like : `a -> b`, Logik automatically returns the associated truth table. In ou case it returns the following table :
-
-```
-a b
-----
-0 0 1
-0 1 1
-1 0 0
-1 1 1
-```
-
-It will also return the associated syntax tree :
-
-```
-->
-  a
-  b
 ```
 
 ## TODO(S)

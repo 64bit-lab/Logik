@@ -2,6 +2,8 @@ import os
 from . lexer import *
 from . parser import *
 from . evaluator import *
+from . sat import process_ast
+from . sat import solver
 
 def display_info():
     print("------------------------------------")
@@ -46,6 +48,19 @@ def cmd(c):
 
     if c == "clear":
         os.system("clear")
+        return
+
+    if c == "cnf":
+        form = input('formula >> ')
+        ast = parse(Lexbuf(list(lex(form))))
+        ast = process_ast.prepare_for_cnf(ast)
+        pprint(ast)
+        return
+
+    if c == "clauses":
+        form = input('formula >> ')
+        ast = parse(Lexbuf(list(lex(form))))
+        print(solver.extract_clauses(ast))
         return
 
     print("\033[1m/!\\\033[0m unknown command '" + c + "'")
